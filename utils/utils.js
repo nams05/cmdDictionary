@@ -82,5 +82,9 @@ module.exports = (function(){
         printFormatted(word, definition);
     };
 
+    that.isEmpty = function(obj){
+        return (Object.getOwnPropertyNames(obj).length === 0);
+    }
+
     return that;
 })();

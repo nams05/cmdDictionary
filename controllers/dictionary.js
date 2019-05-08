@@ -2,15 +2,10 @@
 
 const wordnikService = require('../services/wordnik');
 const utils = require('../utils/utils');
-const waterfall = require('async-waterfall');
 const async = require('async');
 const messages = require('../configuration/messages');
 
 module.exports = (function(){
-    var isEmpty = function(obj){
-        return (Object.getOwnPropertyNames(obj).length === 0);
-    }
-
     /*
     Public functions
     */
@@ -21,7 +16,7 @@ module.exports = (function(){
 
         wordnikService.getWordDefinition(word, function(err, json){
             if(err) return console.log(messages.wordnikApiError, err);
-            if(json.length === 0) {
+            if(utils.isEmpty(json)){
                 console.log(messages.notFound + word);
             } else{
                 utils.formatDefinition(word, json);
@@ -37,12 +32,11 @@ module.exports = (function(){
 
         wordnikService.getWordSynonym(word,function(err, json){
             if(err) return console.log(messages.wordnikApiError, err);
-            if(json.length === 0){
+            if(utils.isEmpty(json)){
                 console.log(messages.notFound + word);
             } else{
                 utils.printSynonyms(word, json[0].words);
             }
-            //for async-waterfall, while getting Full dictionary
             if(callback) callback(null,word);
             if (mainCallback) mainCallback();
         });
@@ -53,7 +47,7 @@ module.exports = (function(){
 
         wordnikService.getWordAntonym(word, function(err, json){
             if(err) return console.log(messages.wordnikApiError, err);
-            if(json.length === 0){
+            if(utils.isEmpty(json)){
                 console.log(messages.notFound + word);
             } else{
                 utils.printAntonyms(word, json[0].words);
@@ -68,7 +62,7 @@ module.exports = (function(){
 
         wordnikService.getWordExamples(word,function(err, json){
             if(err) return console.log(messages.wordnikApiError, err);
-            if(isEmpty(json)){
+            if(utils.isEmpty(json)){
                 console.log(messages.notFound + word);
             } else{
                 utils.printExamples(word, json);
