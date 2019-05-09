@@ -74,7 +74,7 @@ module.exports = (function(){
 
     that.showCompleteWordDetails = function(word, mainCallback){
         async.parallel([that.defineWord(word), that.getWordSynonym(word), that.getWordAntonym(word), that.getWordExamples(word)]);
-        if (mainCallback) setTimeout(mainCallback, 3000);
+        if (mainCallback) setTimeout(mainCallback, 4000);
     };
 
     that.getWordOfTheDay = function(mainCallback){

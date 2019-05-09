@@ -2,6 +2,8 @@
 
 const dictionary = require('../controllers/dictionary');
 const utils = require('../utils/utils');
+const play = require('../controllers/play');
+const messages = require('../configuration/messages');
 
 module.exports = function(input, gameMode, callback){
     let program = input[0];
@@ -23,7 +25,17 @@ module.exports = function(input, gameMode, callback){
             dictionary.getWordExamples(word, callback);
             break;
             case 'play':
-            utils.startGame(gameMode);
+            play.getQuestion(function(err, result){
+                if(err) return console.log('Error while fetching Question', err);
+                gameMode.playing=true;
+                gameMode.randomWord = result.word;
+                gameMode.answering = true;
+                gameMode.hintsTaken=0;
+                console.log('-----------------Word Play Mode-------------------');
+                console.log(`Enter the correct word for definition, synonym, or antonym of the word.\n`);
+                console.log(`Question: ${result.question}`);
+                callback(messages.gameMessage1);
+            });
             break;
             case 'help':
             utils.displayHelp(callback);

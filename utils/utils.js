@@ -65,10 +65,6 @@ module.exports = (function(){
         if (callback) callback();
     };
 
-    that.startGame = function (gameMode) {
-        console.log("Help is being delivered.")
-    };
-
     that.formatDefinition = function(word, response){
         const definition = {};
         response.forEach((value)=>{
