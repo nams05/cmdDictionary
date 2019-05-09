@@ -10,17 +10,20 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+process.on('uncaughtException', function (err) {
+  console.error(err);
+});
 
 var gameMode = {
-  answering:false,
-  randomWord:'',
-  playing:false,
-  hintsTaken:0,
+  answering: false,
+  randomWord: '',
+  playing: false,
+  hintsTaken: 0,
 };
 
 function main(input, callback) {
   console.log(gameMode);
-  if(!gameMode.playing){
+  if (!gameMode.playing) {
     input = input.split(' ');
     require('./routes/routes')(input, gameMode, callback);
   } else {
@@ -32,11 +35,16 @@ var recursiveAsyncReadLine = function (message) {
   if (!message) message = messages.enterCommand;
 
   rl.question(message, (input) => {
-    if (input == 'exit') 
-      return rl.close(); 
-    main(input, function(_message){
-      recursiveAsyncReadLine(_message);  
-    });
+    if (input == 'exit')
+      return rl.close();
+    try {
+      main(input, function (_message) {
+        recursiveAsyncReadLine(_message);
+      });
+    } catch (e) {
+      console.log(e);
+      recursiveAsyncReadLine(messages.enterCommand);
+    }
   });
 };
 

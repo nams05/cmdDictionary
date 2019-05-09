@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = {
-  seperator1 : '\n--------------------------------------------',
-  seperator2 : '--------------------------------------------',
-  seperatorEnd : '############################################\n',
+  seperator1: '\n--------------------------------------------',
+  seperator2: '--------------------------------------------',
+  seperatorEnd: '############################################\n',
   partOfSpeech: ' [Part of speech: ',
   bullet: '->  ',
-  notFound: 'Word not found: ',
+  notFound: ' not found for: ',
   wordnikApiError: "Error while fetching word details from Wordnik.",
   helpText: `
   Help:
@@ -30,4 +30,11 @@ module.exports = {
   3. Quit`,
   enterChoice: 'Enter choice: ',
   enterCommand: 'Enter a command (use "./dict help" for help): ',
+  definition: 'Definition',
+  antonyms: 'Antonyms',
+  synonyms: 'Synonyms',
+  examples: 'Examples',
+  colon: ': ',
+  spaceSeperator: " ",
+  wordError: "Word required.",
 };
