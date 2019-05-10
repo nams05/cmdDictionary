@@ -22,7 +22,7 @@ var gameMode = {
 };
 
 function main(input, callback) {
-  console.log(gameMode);
+  //   console.log(gameMode);
   if (!gameMode.playing) {
     input = input.split(' ');
     require('./routes/routes')(input, gameMode, callback);
